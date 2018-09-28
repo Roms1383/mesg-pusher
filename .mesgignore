@@ -4,6 +4,8 @@ my-tests/
 .commitlintrc.js
 .eslintignore
 .eslintrc.yml
+.huskyrc.yml
+.lintstagedrc.yml
 .nvmrc
 .preparerc.js
 .releaserc.js
