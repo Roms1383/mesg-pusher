@@ -1,0 +1,19 @@
+extends: standard
+rules:
+  indent:
+    - error
+    - 2
+    - MemberExpression: 0
+      ignoredNodes:
+        - ConditionalExpression
+  arrow-body-style:
+    - error
+    - as-needed
+  implicit-arrow-linebreak:
+    - error
+    - beside
+  operator-linebreak:
+    - error
+    - before
+env:
+  jest: true

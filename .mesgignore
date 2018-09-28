@@ -1,0 +1,10 @@
+node_modules
+my-tests/
+**/*.test.js
+.commitlintrc.js
+.eslintignore
+.eslintrc.yml
+.nvmrc
+.preparerc.js
+.releaserc.js
+README.md

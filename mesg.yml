@@ -1,0 +1,95 @@
+name: mesg-pusher
+description: MESG Service for Pusher
+tasks:
+  trigger:
+    description: triggers an event on one or more channels
+    inputs:
+      appId: &appId
+        type: String
+        description: Pusher application ID
+      key: &key
+        type: String
+        description: Pusher application key
+      secret: &secret
+        type: String
+        description: Pusher application secret key
+      encrypted: &encrypted
+        type: Boolean
+        description: whether to encrypt notification, defaults to false
+        optional: true
+      cluster: &cluster
+        type: String
+        description: if `host` is present, it will override the `cluster` option
+        optional: true
+      host: &host
+        type: String
+        description: whether to use a different host, defaults to api.pusherapp.com
+        optional: true
+      port: &port
+        type: Number
+        description: whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted
+        optional: true
+      proxy: &proxy
+        type: String
+        description: URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted
+        optional: true
+      timeout: &timeout
+        type: Number
+        description: timeout for all requests in milliseconds
+        optional: true
+      keepAlive: &keepAlive
+        type: Boolean
+        description: enables keep-alive, defaults to false
+        optional: true
+      name:
+        type: String
+        description: event name
+      data:
+        type: Object
+        description: event data (maximum 10Kb)
+      channels:
+        type: Object
+        description: array of one or more channel names - limited to 100 channels
+        optional: true
+      channel:
+        type: String
+        description: channel name if publishing to a single channel (can be used instead of channels)
+        optional: true
+      socket_id:
+        type: Object
+        description: excludes the event from being sent to a specific connection
+        optional: true
+    outputs:
+      success:
+        data:
+          message:
+            type: String
+      error:
+        data:
+          error:
+            type: String
+  triggerBatch:
+    description: triggers multiple events in a single call (up to 10 per call on the multi-tenant clusters)
+    inputs:
+      appId: *appId
+      key: *key
+      secret: *secret
+      encrypted: *encrypted
+      cluster: *cluster
+      host: *host
+      port: *port
+      proxy: *proxy
+      timeout: *timeout
+      keepAlive: *keepAlive
+      batch:
+        type: Object
+        description: array of events (maximum 10)
+    outputs:
+      success:
+        data:
+          message:
+            type: String
+      error:
+        data:
+          error:
+            type: String
