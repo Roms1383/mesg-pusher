@@ -1,5 +1,5 @@
 name: mesg-pusher
-description: MESG Service for Pusher
+description: MESG Service for [Pusher](https://pusher.com/docs/server_api_guide)
 tasks:
   trigger:
     description: triggers an event on one or more channels

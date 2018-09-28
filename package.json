@@ -40,6 +40,7 @@
     "code:build": "yarn install --production",
     "mesg:dev": "yarn clean && yarn build && mesg-core service dev",
     "mesg:quick-dev": "mesg-core service dev",
+    "mesg:doc": "mesg-core service gen-doc",
     "docs:dev": "yarn vuepress dev docs",
     "docs:build": "yarn vuepress build docs",
     "cli:commit": "gitmoji -c",
