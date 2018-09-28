@@ -36,17 +36,17 @@
     "vuepress": "^0.14.1"
   },
   "scripts": {
-    "clean": "rm -rf ./node_modules",
-    "build": "yarn install --production",
-    "dev": "yarn clean && yarn build && mesg-core service dev",
-    "quick-dev": "mesg-core service dev",
+    "code:clean": "rm -rf ./node_modules",
+    "code:build": "yarn install --production",
+    "mesg:dev": "yarn clean && yarn build && mesg-core service dev",
+    "mesg:quick-dev": "mesg-core service dev",
     "docs:dev": "yarn vuepress dev docs",
     "docs:build": "yarn vuepress build docs",
     "cli:commit": "gitmoji -c",
     "cli:list": "gitmoji -l",
     "cli:configure": "gitmoji -g",
     "code:lint": "eslint --fix './**/*.js'",
-    "code:test:unit": "jest --env=node --verbose",
-    "code:test:coverage": "jest --env=node --coverage"
+    "unit:test": "jest --env=node --verbose",
+    "code:coverage": "jest --env=node --coverage"
   }
 }
