@@ -8,3 +8,5 @@ my-tests/
 .preparerc.js
 .releaserc.js
 README.md
+.DS_Store
+.gitignore
