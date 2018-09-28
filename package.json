@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.0",
-    "@semantic-release/github": "^5.0.5",
     "@semantic-release/git": "^7.0.1",
+    "@semantic-release/github": "^5.0.5",
     "@semantic-release/npm": "^5.0.1",
     "commitlint": "^7.0.0",
     "commitlint-config-gitmoji": "^1.0.1",
@@ -42,11 +42,10 @@
     "quick-dev": "mesg-core service dev",
     "docs:dev": "yarn vuepress dev docs",
     "docs:build": "yarn vuepress build docs",
-    "code:lint": "yarn code:lint:js",
     "cli:commit": "gitmoji -c",
     "cli:list": "gitmoji -l",
     "cli:configure": "gitmoji -g",
-    "code:lint:js": "eslint --fix './**/*.js'",
+    "code:lint": "eslint --fix './**/*.js'",
     "code:test:unit": "jest --env=node --verbose",
     "code:test:coverage": "jest --env=node --coverage"
   }
