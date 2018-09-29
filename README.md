@@ -70,7 +70,7 @@ fetch one or some attributes for a given channel
 | **key** | `String` | Pusher application key |
 | **params** | `Object` | additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
 
@@ -120,7 +120,7 @@ get the list of the channel within an application that have active subscriptions
 | **key** | `String` | Pusher application key |
 | **params** | `Object` | additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
 
@@ -171,7 +171,7 @@ triggers an event on one or more channels
 | **key** | `String` | Pusher application key |
 | **name** | `String` | event name |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **socket_id** | `Object` | excludes the event from being sent to a specific connection |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
@@ -220,7 +220,7 @@ triggers multiple events in a single call (up to 10 per call on the multi-tenant
 | **keepAlive** | `Boolean` | enables keep-alive, defaults to false |
 | **key** | `String` | Pusher application key |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
 
