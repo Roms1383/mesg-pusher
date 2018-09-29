@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Roms1383/mesg-pusher"
+    "url": "https://github.com/Roms1383/mesg-pusher.git"
   },
   "author": "Romain KELIFA",
   "license": "MIT",
