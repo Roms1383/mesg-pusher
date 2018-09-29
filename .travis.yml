@@ -17,7 +17,6 @@ stages:
     name: "Unit-tests"
   - stage: release
     name: "Semantic release"
-    script: skip
     after_success:
       - yarn semantic-release
     if: branch = master || branch = release || branch = test-ci
