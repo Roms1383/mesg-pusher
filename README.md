@@ -41,8 +41,8 @@ const channel = pusher.subscribe(CHANNEL)
 channel.bind(EVENT, data => {
   // example : launch some task
   MESG.api.ExecuteTask({
-    serviceID: "SOME_LOCAL_MESG_SERVICE_ID",
-    taskKey: "some-task",
+    serviceID: 'SOME_LOCAL_MESG_SERVICE_ID',
+    taskKey: 'some-task',
     inputData: JSON.stringify(Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
   }, (err, reply) => {
     // handle response if needed
