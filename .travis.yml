@@ -19,11 +19,11 @@ stages:
     name: "Unit-tests"
   - stage: release
     name: "Semantic release"
-    if: branch = release
 jobs:
   include:
     - stage: test
     - stage: release
+      if: branch = release
       install: true
       after_success:
         - yarn semantic-release --branch $TRAVIS_BRANCH
