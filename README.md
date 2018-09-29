@@ -1,10 +1,31 @@
 # mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-MESG Service for [Pusher](https://pusher.com/docs/server_api_guide)
+[MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
 [![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
+# Features
+
+Currently able to use Pusher [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from MESG.
+Use case would be multiple MESG Applications communicating together over Pusher notifications.
+
+# Usage in MESG Application
+
+Use this MESG Service to send notifications over Pusher.
+
+Create one or more MESG Application(s) to listen to the notifications emitted by the MESG Service(s).
+
+```js
+// in a MESG Application
+const Pusher = require('pusher-js')
+const pusher = new Pusher('KEY', { cluster: 'CLUSTER', forceTLS: true }) // replace with your credentials
+const CHANNEL = 'some-channel'
+const EVENT = 'some-event'
+const channel = pusher.subscribe(CHANNEL)
+// example : re-dispatch the received Pusher notification to your local MESG Services
+channel.bind(EVENT, data => { MESG.emitEvent('received', Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
+```
 
 # Tasks
 
