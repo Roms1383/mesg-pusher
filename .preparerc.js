@@ -1,7 +1,7 @@
 const Path = require('path')
 const FS = require('fs')
 const ParseGithubURL = require('parse-github-url')
-module.exports = async (_, { lastRelease, nextRelease }) => {
+module.exports = async (_, { lastRelease, nextRelease, options: { repositoryUrl } }) => {
   const { name } = ParseGithubURL(repositoryUrl)
   const last = lastRelease.version
   const next = nextRelease.version
