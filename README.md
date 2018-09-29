@@ -2,8 +2,8 @@
 
 MESG Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
-![MESG](./logo-mesg.svg) | ![Pusher](./logo-pusher.svg)
------------------------- | ------------------------------
+[![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
+--------------------------------------------- | ---------------------------------------------
 
 
 # Tasks
