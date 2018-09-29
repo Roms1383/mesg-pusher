@@ -1,6 +1,6 @@
 {
   "name": "@mesg/pusher",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "MESG Service to interact with Pusher",
   "main": "index.js",
   "repository": {
