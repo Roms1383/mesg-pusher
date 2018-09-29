@@ -7,14 +7,27 @@
 
 # Features
 
-Currently able to use Pusher [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from MESG.
-Use case would be multiple MESG Applications communicating together over Pusher notifications.
+Currently able to use `Pusher` [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from `MESG`.
 
-# Usage in MESG Application
+# Use case
 
-Use this MESG Service to send notifications over Pusher.
+`MESG Applications` on different servers communicating together over `Pusher` notifications.
 
-Create one or more MESG Application(s) to listen to the notifications emitted by the MESG Service(s).
+## Example
+
+1.  on `MESG Application` on a server `A` : use this `MESG Service` to send notifications over `Pusher`.
+
+2.  on `MESG Application` on a server `B` : listen to the notifications emitted by `MESG Application` on a server `A` over `Pusher`.
+
+# How to listen in a `MESG Application`
+
+Install `Pusher` dependency :
+
+```shell
+yarn add pusher-js
+```
+
+Create a socket connection to listen to `Pusher` notifications :
 
 ```js
 // in a MESG Application
@@ -23,7 +36,7 @@ const pusher = new Pusher('KEY', { cluster: 'CLUSTER', forceTLS: true }) // repl
 const CHANNEL = 'some-channel'
 const EVENT = 'some-event'
 const channel = pusher.subscribe(CHANNEL)
-// example : re-dispatch the received Pusher notification to your local MESG Services
+// example : re-dispatch the received Pusher notification to another local MESG Application
 channel.bind(EVENT, data => { MESG.emitEvent('received', Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
 ```
 
