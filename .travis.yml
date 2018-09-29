@@ -10,14 +10,12 @@ before_install:
   - yarn install
 jobs:
   include:
-    - stage: develop
-      name: "Development"
-    - stage: release
+    - if: branch = master
+    - if: branch = release
+    - if: branch = test-ci
       name: "Release"
       branches:
       only:
-        - master
         - release
-        - test-ci
       after_success:
         - yarn semantic-release
