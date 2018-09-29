@@ -21,23 +21,33 @@ Currently able to use `Pusher` [channels](https://pusher.com/docs/server_api_gui
 
 # How to listen in a `MESG Application`
 
-Install `Pusher` dependency :
+Install `MESG` and `Pusher` dependencies :
 
 ```shell
-yarn add pusher-js
+yarn add mesg-js pusher-js
 ```
 
-Create a socket connection to listen to `Pusher` notifications :
+Create a socket connection to listen and react to `Pusher` notifications :
 
 ```js
 // in a MESG Application
+const MESG = require('mesg-js').application()
 const Pusher = require('pusher-js')
 const pusher = new Pusher('KEY', { cluster: 'CLUSTER', forceTLS: true }) // replace with your credentials
 const CHANNEL = 'some-channel'
 const EVENT = 'some-event'
 const channel = pusher.subscribe(CHANNEL)
-// example : re-dispatch the received Pusher notification to another local MESG Application
-channel.bind(EVENT, data => { MESG.emitEvent('received', Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
+// on Pusher notification received
+channel.bind(EVENT, data => {
+  // example : launch some task
+  MESG.api.ExecuteTask({
+    serviceID: "SOME_LOCAL_MESG_SERVICE_ID",
+    taskKey: "some-task",
+    inputData: JSON.stringify(Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
+  }, (err, reply) => {
+    // handle response if needed
+  })
+})
 ```
 
 # Tasks
