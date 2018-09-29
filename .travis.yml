@@ -12,16 +12,18 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
   - echo "installing dependencies..."
   - yarn install
+script:
+  - yarn test || travis_terminate 1;
 stages:
   - stage: test
     name: "Unit-tests"
   - stage: release
     name: "Semantic release"
-    if: branch = master OR branch = release OR branch = test-ci
 jobs:
   include:
     - stage: test
     - stage: release
+      if: branch = release
       install: true
       after_success:
         - yarn semantic-release --branch $TRAVIS_BRANCH
