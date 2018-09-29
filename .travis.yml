@@ -22,4 +22,4 @@ jobs:
   include:
     - stage: release
       after_success:
-        - yarn semantic-release --branch TRAVIS_BRANCH
+        - yarn semantic-release --branch $TRAVIS_BRANCH
