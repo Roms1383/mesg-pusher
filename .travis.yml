@@ -12,9 +12,9 @@ before_install:
 jobs:
   include:
     - stage: develop
-      script: echo "testing branch..."
+      name: "Development"
     - stage: release
-      script: echo "releasing branch..."
+      name: "Release"
       branches:
       only:
         - master
