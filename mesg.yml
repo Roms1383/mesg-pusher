@@ -93,3 +93,63 @@ tasks:
         data:
           error:
             type: String
+  channels:
+    description: get the list of the channel within an application that have active subscriptions (also referred to as being **occupied**) 
+    inputs:
+      appId: *appId
+      key: *key
+      secret: *secret
+      encrypted: *encrypted
+      cluster: *cluster
+      host: *host
+      port: *port
+      proxy: *proxy
+      timeout: *timeout
+      keepAlive: *keepAlive
+      params:
+        type: Object
+        description: additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api))
+        optional: true
+    outputs:
+      success:
+        data:
+          channels:
+            type: Object
+      error:
+        data:
+          error:
+            type: String
+  channel:
+    description: fetch one or some attributes for a given channel
+    inputs:
+      appId: *appId
+      key: *key
+      secret: *secret
+      encrypted: *encrypted
+      cluster: *cluster
+      host: *host
+      port: *port
+      proxy: *proxy
+      timeout: *timeout
+      keepAlive: *keepAlive
+      params:
+        type: Object
+        description: additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api))
+        optional: true
+    outputs:
+      success:
+        data:
+          occupied:
+            type: Boolean
+          user_count:
+            type: Number
+            description: number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one)
+            optional: true
+          subscription_count:
+            type: Number
+            description: number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard)
+            optional: true
+      error:
+        data:
+          error:
+            type: String
