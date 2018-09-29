@@ -8,7 +8,6 @@ stages:
 before_install:
   - echo "installing dependencies..."
   - yarn install
-  - yarn unit:test
 jobs:
   include:
     - stage: develop

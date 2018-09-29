@@ -49,6 +49,7 @@
     "cli:configure": "gitmoji -g",
     "code:lint": "eslint --fix './**/*.js'",
     "unit:test": "jest --env=node --verbose",
-    "code:coverage": "jest --env=node --coverage"
+    "code:coverage": "jest --env=node --coverage",
+    "test": "yarn unit:test"
   }
 }
