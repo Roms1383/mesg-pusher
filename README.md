@@ -5,21 +5,21 @@
 [![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
-# Features
+## Features
 
 Currently able to use `Pusher` [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from `MESG`.
 
-# Use case
+## Use case
 
 `MESG Applications` on different servers communicating together over `Pusher` notifications.
 
-## Example
+### Example
 
 1.  on `MESG Application` on a server `A` : use this `MESG Service` to send notifications over `Pusher`.
 
 2.  on `MESG Application` on a server `B` : listen to the notifications emitted by `MESG Application` on a server `A` over `Pusher`.
 
-# How to listen in a `MESG Application`
+## How to listen in a `MESG Application`
 
 Install `MESG` and `Pusher` dependencies :
 
@@ -49,6 +49,8 @@ channel.bind(EVENT, data => {
   })
 })
 ```
+
+***
 
 # Tasks
 
