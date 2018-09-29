@@ -1,4 +1,4 @@
-# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-1.0.11-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-1.0.12-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
@@ -41,8 +41,8 @@ const channel = pusher.subscribe(CHANNEL)
 channel.bind(EVENT, data => {
   // example : launch some task
   MESG.api.ExecuteTask({
-    serviceID: "SOME_LOCAL_MESG_SERVICE_ID",
-    taskKey: "some-task",
+    serviceID: 'SOME_LOCAL_MESG_SERVICE_ID',
+    taskKey: 'some-task',
     inputData: JSON.stringify(Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
   }, (err, reply) => {
     // handle response if needed
