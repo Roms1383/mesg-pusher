@@ -62,7 +62,7 @@ Output key: `error`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **error** | `String` |  |
+| **error** | `String` | error |
 
 ##### success
 
@@ -72,7 +72,7 @@ Output key: `success`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **occupied** | `Boolean` |  |
+| **occupied** | `Boolean` | whether the channel currently has active subscriptions |
 | **subscription_count** | `Number` | number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard) |
 | **user_count** | `Number` | number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one) |
 
@@ -112,7 +112,7 @@ Output key: `error`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **error** | `String` |  |
+| **error** | `String` | error |
 
 ##### success
 
@@ -122,7 +122,7 @@ Output key: `success`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **channels** | `Object` |  |
+| **channels** | `Object` | array of channel names |
 
 
 
@@ -164,7 +164,7 @@ Output key: `error`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **error** | `String` |  |
+| **error** | `String` | error |
 
 ##### success
 
@@ -174,7 +174,7 @@ Output key: `success`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **message** | `String` |  |
+| **message** | `String` | a dummy &#39;sent&#39; message |
 
 
 
@@ -212,7 +212,7 @@ Output key: `error`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **error** | `String` |  |
+| **error** | `String` | error |
 
 ##### success
 
@@ -222,7 +222,7 @@ Output key: `success`
 
 | **Key** | **Type** | **Description** |
 | --- | --- | --- |
-| **message** | `String` |  |
+| **message** | `String` | a dummy &#39;sent&#39; message |
 
 
 

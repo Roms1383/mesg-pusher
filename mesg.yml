@@ -63,11 +63,13 @@ tasks:
       success:
         data:
           message:
+            description: a dummy 'sent' message
             type: String
       error:
         data:
-          error:
+          error: &error
             type: String
+            description: error
   triggerBatch:
     description: triggers multiple events in a single call (up to 10 per call on the multi-tenant clusters)
     inputs:
@@ -88,11 +90,11 @@ tasks:
       success:
         data:
           message:
+            description: a dummy 'sent' message
             type: String
       error:
         data:
-          error:
-            type: String
+          error: *error
   channels:
     description: get the list of the channel within an application that have active subscriptions (also referred to as being **occupied**) 
     inputs:
@@ -115,10 +117,10 @@ tasks:
         data:
           channels:
             type: Object
+            description: array of channel names
       error:
         data:
-          error:
-            type: String
+          error: *error
   channel:
     description: fetch one or some attributes for a given channel
     inputs:
@@ -141,6 +143,7 @@ tasks:
         data:
           occupied:
             type: Boolean
+            description: whether the channel currently has active subscriptions
           user_count:
             type: Number
             description: number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one)
@@ -151,5 +154,4 @@ tasks:
             optional: true
       error:
         data:
-          error:
-            type: String
+          error: *error
