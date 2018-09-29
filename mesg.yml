@@ -31,7 +31,7 @@ tasks:
         optional: true
       proxy: &proxy
         type: String
-        description: URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted
+        description: URL to proxy the requests through
         optional: true
       timeout: &timeout
         type: Number

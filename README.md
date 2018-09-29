@@ -1,25 +1,25 @@
-# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-1.0.12-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-1.0.14-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
 [![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
-# Features
+## Features
 
 Currently able to use `Pusher` [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from `MESG`.
 
-# Use case
+## Use case
 
 `MESG Applications` on different servers communicating together over `Pusher` notifications.
 
-## Example
+### Example
 
 1.  on `MESG Application` on a server `A` : use this `MESG Service` to send notifications over `Pusher`.
 
 2.  on `MESG Application` on a server `B` : listen to the notifications emitted by `MESG Application` on a server `A` over `Pusher`.
 
-# How to listen in a `MESG Application`
+## How to listen in a `MESG Application`
 
 Install `MESG` and `Pusher` dependencies :
 
@@ -50,6 +50,8 @@ channel.bind(EVENT, data => {
 })
 ```
 
+***
+
 # Tasks
 
 ## channel
@@ -70,7 +72,7 @@ fetch one or some attributes for a given channel
 | **key** | `String` | Pusher application key |
 | **params** | `Object` | additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
 
@@ -120,7 +122,7 @@ get the list of the channel within an application that have active subscriptions
 | **key** | `String` | Pusher application key |
 | **params** | `Object` | additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
 
@@ -171,7 +173,7 @@ triggers an event on one or more channels
 | **key** | `String` | Pusher application key |
 | **name** | `String` | event name |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **socket_id** | `Object` | excludes the event from being sent to a specific connection |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
@@ -220,7 +222,7 @@ triggers multiple events in a single call (up to 10 per call on the multi-tenant
 | **keepAlive** | `Boolean` | enables keep-alive, defaults to false |
 | **key** | `String` | Pusher application key |
 | **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `String` | URL to proxy the requests through |
 | **secret** | `String` | Pusher application secret key |
 | **timeout** | `Number` | timeout for all requests in milliseconds |
 
