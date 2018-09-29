@@ -2,20 +2,15 @@ language: node_js
 # node version is set by .nvmrc
 git:
   submodules: false
-stages:
-  - develop
-  - release
 before_install:
   - echo "installing dependencies..."
   - yarn install
-jobs:
-  include:
-    - if: branch = master
-    - if: branch = release
-    - if: branch = test-ci
-      name: "Release"
-      branches:
-      only:
-        - release
-      after_success:
-        - yarn semantic-release
+stages:
+  - stage: test
+    name: "Unit-tests"
+  - stage: release
+    name: "Semantic release"
+    script: skip
+    after_success:
+      - yarn semantic-release
+    if: branch = master || branch = release || branch = test-ci
