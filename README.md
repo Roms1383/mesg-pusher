@@ -5,6 +5,25 @@
 [![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
+## Installation
+
+### MESG Core
+
+This service requires [MESG Core](https://github.com/mesg-foundation/core) to be installed first.
+
+You can install MESG Core by running the following command or [follow the installation guide](https://docs.mesg.com/guide/start-here/installation.html).
+
+```bash
+bash <(curl -fsSL https://mesg.com/install)
+```
+
+### Service
+
+Download the source code of this service, and then in the service's folder, run the following command:
+```bash
+mesg-core service deploy https://github.com/Roms1383/mesg-pusher
+```
+
 ## Features
 
 Currently able to use `Pusher` [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from `MESG`.
@@ -41,7 +60,7 @@ const channel = pusher.subscribe(CHANNEL)
 channel.bind(EVENT, data => {
   // example : launch some task
   MESG.api.ExecuteTask({
-    serviceID: 'SOME_LOCAL_MESG_SERVICE_ID',
+    serviceID: 'com.mesg.pusher',
     taskKey: 'some-task',
     inputData: JSON.stringify(Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
   }, (err, reply) => {

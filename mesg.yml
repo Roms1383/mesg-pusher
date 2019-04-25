@@ -1,4 +1,5 @@
 name: mesg-pusher
+sid: com.mesg.pusher
 description: MESG Service for [Pusher](https://pusher.com/docs/server_api_guide)
 tasks:
   trigger:
