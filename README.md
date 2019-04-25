@@ -5,9 +5,20 @@
 [![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
-## Installation
+# Contents
 
-### MESG Core
+- [Installation](#Installation)
+- [Features](#Features)
+- [Definitions](#Definitions)
+  - [Tasks](#Tasks)
+    - [channel](#channel)
+    - [channels](#channels)
+    - [trigger](#trigger)
+    - [triggerBatch](#triggerbatch)
+
+# Installation
+
+## MESG Core
 
 This service requires [MESG Core](https://github.com/mesg-foundation/core) to be installed first.
 
@@ -17,14 +28,13 @@ You can install MESG Core by running the following command or [follow the instal
 bash <(curl -fsSL https://mesg.com/install)
 ```
 
-### Service
+## Service
 
-Download the source code of this service, and then in the service's folder, run the following command:
 ```bash
 mesg-core service deploy https://github.com/Roms1383/mesg-pusher
 ```
 
-## Features
+# Features
 
 Currently able to use `Pusher` [channels](https://pusher.com/docs/server_api_guide/interact_rest_api#application-channels), [channel](https://pusher.com/docs/server_api_guide/interact_rest_api#channel-information), [trigger](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-events) and [triggerBatch](https://pusher.com/docs/server_api_guide/interact_rest_api#publishing-batches-of-events) features from `MESG`.
 
@@ -71,6 +81,9 @@ channel.bind(EVENT, data => {
 
 ***
 
+# Definitions
+
+
 # Tasks
 
 ## channel
@@ -81,46 +94,43 @@ fetch one or some attributes for a given channel
 
 ### Inputs
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **appId** | `String` | Pusher application ID |
-| **cluster** | `String` | if `host` is present, it will override the `cluster` option |
-| **encrypted** | `Boolean` | whether to encrypt notification, defaults to false |
-| **host** | `String` | whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `Boolean` | enables keep-alive, defaults to false |
-| **key** | `String` | Pusher application key |
-| **params** | `Object` | additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
-| **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through |
-| **secret** | `String` | Pusher application secret key |
-| **timeout** | `Number` | timeout for all requests in milliseconds |
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **appId** | `appId` | `String` | Pusher application ID |
+| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
+| **encrypted** | `encrypted` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **key** | `key` | `String` | Pusher application key |
+| **params** | `params` | `Object` | **`optional`** additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
+| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
+| **secret** | `secret` | `String` | Pusher application secret key |
+| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
 
 ### Outputs
 
-##### error
+#### error
 
 Output key: `error`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **error** | `String` | error |
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **error** | `error` | `String` | error |
 
-##### success
+#### success
 
 Output key: `success`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **occupied** | `Boolean` | whether the channel currently has active subscriptions |
-| **subscription_count** | `Number` | number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard) |
-| **user_count** | `Number` | number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one) |
-
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **occupied** | `occupied` | `Boolean` | whether the channel currently has active subscriptions |
+| **subscription_count** | `subscription_count` | `Number` | **`optional`** number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard) |
+| **user_count** | `user_count` | `Number` | **`optional`** number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one) |
 
 
 ## channels
@@ -131,44 +141,41 @@ get the list of the channel within an application that have active subscriptions
 
 ### Inputs
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **appId** | `String` | Pusher application ID |
-| **cluster** | `String` | if `host` is present, it will override the `cluster` option |
-| **encrypted** | `Boolean` | whether to encrypt notification, defaults to false |
-| **host** | `String` | whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `Boolean` | enables keep-alive, defaults to false |
-| **key** | `String` | Pusher application key |
-| **params** | `Object` | additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
-| **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through |
-| **secret** | `String` | Pusher application secret key |
-| **timeout** | `Number` | timeout for all requests in milliseconds |
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **appId** | `appId` | `String` | Pusher application ID |
+| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
+| **encrypted** | `encrypted` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **key** | `key` | `String` | Pusher application key |
+| **params** | `params` | `Object` | **`optional`** additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
+| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
+| **secret** | `secret` | `String` | Pusher application secret key |
+| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
 
 ### Outputs
 
-##### error
+#### error
 
 Output key: `error`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **error** | `String` | error |
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **error** | `error` | `String` | error |
 
-##### success
+#### success
 
 Output key: `success`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **channels** | `Object` | array of channel names |
-
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **channels** | `channels` | `Object` | array of channel names |
 
 
 ## trigger
@@ -179,48 +186,45 @@ triggers an event on one or more channels
 
 ### Inputs
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **appId** | `String` | Pusher application ID |
-| **channel** | `String` | channel name if publishing to a single channel (can be used instead of channels) |
-| **channels** | `Object` | array of one or more channel names - limited to 100 channels |
-| **cluster** | `String` | if `host` is present, it will override the `cluster` option |
-| **data** | `Object` | event data (maximum 10Kb) |
-| **encrypted** | `Boolean` | whether to encrypt notification, defaults to false |
-| **host** | `String` | whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `Boolean` | enables keep-alive, defaults to false |
-| **key** | `String` | Pusher application key |
-| **name** | `String` | event name |
-| **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through |
-| **secret** | `String` | Pusher application secret key |
-| **socket_id** | `Object` | excludes the event from being sent to a specific connection |
-| **timeout** | `Number` | timeout for all requests in milliseconds |
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **appId** | `appId` | `String` | Pusher application ID |
+| **channel** | `channel` | `String` | **`optional`** channel name if publishing to a single channel (can be used instead of channels) |
+| **channels** | `channels` | `Object` | **`optional`** array of one or more channel names - limited to 100 channels |
+| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
+| **data** | `data` | `Object` | event data (maximum 10Kb) |
+| **encrypted** | `encrypted` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **key** | `key` | `String` | Pusher application key |
+| **name** | `name` | `String` | event name |
+| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
+| **secret** | `secret` | `String` | Pusher application secret key |
+| **socket_id** | `socket_id` | `Object` | **`optional`** excludes the event from being sent to a specific connection |
+| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
 
 ### Outputs
 
-##### error
+#### error
 
 Output key: `error`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **error** | `String` | error |
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **error** | `error` | `String` | error |
 
-##### success
+#### success
 
 Output key: `success`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **message** | `String` | a dummy &#39;sent&#39; message |
-
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **message** | `message` | `String` | a dummy 'sent' message |
 
 
 ## triggerBatch
@@ -231,43 +235,40 @@ triggers multiple events in a single call (up to 10 per call on the multi-tenant
 
 ### Inputs
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **appId** | `String` | Pusher application ID |
-| **batch** | `Object` | array of events (maximum 10) |
-| **cluster** | `String` | if `host` is present, it will override the `cluster` option |
-| **encrypted** | `Boolean` | whether to encrypt notification, defaults to false |
-| **host** | `String` | whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `Boolean` | enables keep-alive, defaults to false |
-| **key** | `String` | Pusher application key |
-| **port** | `Number` | whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
-| **proxy** | `String` | URL to proxy the requests through |
-| **secret** | `String` | Pusher application secret key |
-| **timeout** | `Number` | timeout for all requests in milliseconds |
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **appId** | `appId` | `String` | Pusher application ID |
+| **batch** | `batch` | `Object` | array of events (maximum 10) |
+| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
+| **encrypted** | `encrypted` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **key** | `key` | `String` | Pusher application key |
+| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted |
+| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
+| **secret** | `secret` | `String` | Pusher application secret key |
+| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
 
 ### Outputs
 
-##### error
+#### error
 
 Output key: `error`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **error** | `String` | error |
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **error** | `error` | `String` | error |
 
-##### success
+#### success
 
 Output key: `success`
 
 
 
-| **Key** | **Type** | **Description** |
-| --- | --- | --- |
-| **message** | `String` | a dummy &#39;sent&#39; message |
-
-
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **message** | `message` | `String` | a dummy 'sent' message |
 
 
