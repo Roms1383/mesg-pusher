@@ -2,7 +2,7 @@
 
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
-[![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
+[![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/Roms1383/mesg-pusher.svg)](https://greenkeeper.io/)
 --------------------------------------------- | ---------------------------------------------
 
 ## Features
