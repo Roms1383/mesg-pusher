@@ -39,8 +39,10 @@ jobs:
       after_install:
         - mesg-core start
       before_script:
-        - mesg-core service deploy
-        - mesg-core service start com.mesg.pusher
+        - chmod +x ./mesg-start.sh
+        - chmod +x ./mesg-launch.sh
+        - sh ./mesg-start.sh
+        - sh ./mesg-launch.sh
       script: yarn test
       after_script:
         - mesg-core stop
