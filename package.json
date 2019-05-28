@@ -12,7 +12,8 @@
   "dependencies": {
     "mesg-js": "^2.0.1",
     "pusher": "^2.2.0",
-    "pusher-js": "^4.4.0"
+    "pusher-js": "^4.4.0",
+    "yn": "^3.1.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.2",
