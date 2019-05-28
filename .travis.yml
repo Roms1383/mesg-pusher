@@ -20,9 +20,10 @@ jobs:
     - stage: lint
       script: yarn eslint '*.js'
     - stage: validate
-      before_script: mesg-core start
+      before_script:
+        - bash <(curl -fsSL https://mesg.com/install)
+        - mesg-core start
       script: mesg-core service validate
-      image: mesg/core
     - stage: tests
       install: true
       script: yarn test || travis_terminate 1;
