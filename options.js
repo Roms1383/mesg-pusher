@@ -1,16 +1,20 @@
+const yn = require('yn')
 module.exports = ({
-  appId,
-  key,
-  secret,
-  encrypted = false,
-  cluster = undefined,
-  host = undefined,
-  port = undefined,
-  proxy = undefined,
-  timeout = undefined,
-  keepAlive = false
+  appId = process.env.PUSHER_APP_ID,
+  key = process.env.PUSHER_APP_KEY,
+  secret = process.env.PUSHER_APP_SECRET,
+  encrypted = yn(process.env.PUSHER_ENCRYPTED, { default: false }),
+  cluster = process.env.PUSHER_CLUSTER || undefined,
+  host = process.env.PUSHER_HOST || undefined,
+  port = process.env.PUSHER_PORT || undefined,
+  proxy = process.env.PUSHER_PROXY || undefined,
+  timeout = process.env.PUSHER_TIMEOUT || undefined,
+  keepAlive = yn(process.env.PUSHER_KEEPALIVE, { default: false })
 }) => {
   const options = { appId, key, secret, encrypted, keepAlive }
+  if (!appId) throw new Error(`options must contain application ID`)
+  if (!key) throw new Error(`options must contain application key`)
+  if (!secret) throw new Error(`options must contain application secret key`)
   if (!cluster && !host) throw new Error(`options must contain either cluster or host`)
   if (cluster) options.cluster = cluster
   if (host) options.host = host
