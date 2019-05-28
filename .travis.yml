@@ -27,7 +27,7 @@ jobs:
       name: validate MESG file
       install:
         - "[ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)"
-      before_script:
+      after_install:
         - mesg-core start
       script: mesg-core service validate
       after_script:
@@ -36,8 +36,9 @@ jobs:
       name: integration tests
       install:
         - "[ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)"
-      before_script:
+      after_install:
         - mesg-core start
+      before_script:
         - mesg-core service deploy
         - mesg-core service start com.mesg.pusher
       script: yarn test
