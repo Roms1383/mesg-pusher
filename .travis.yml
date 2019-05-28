@@ -24,11 +24,11 @@ jobs:
       install:
         - bash <(curl -fsSL https://mesg.com/install)
         - yarn
-      after_install:
-        - mesg-core start
     - stage: validate
       name: lint code
       install: true
+      before_script:
+        - mesg-core start
       script: yarn eslint '*.js'
     - stage: validate
       name: validate MESG file
@@ -38,6 +38,7 @@ jobs:
       name: integration tests
       install: true
       before_script:
+        - mesg-core start
         - mesg-core service deploy
         - mesg-core service start com.mesg.pusher
       script: yarn test
