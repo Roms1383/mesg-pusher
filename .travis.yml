@@ -11,7 +11,7 @@ before_install:
   - npm i -g npm@6.9.0
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - bash <(curl -fsSL https://mesg.com/install)
+  - sudo bash <(curl -fsSL https://mesg.com/install)
 install:
   - yarn
 stages:
