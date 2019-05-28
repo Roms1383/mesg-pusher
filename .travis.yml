@@ -24,6 +24,7 @@ jobs:
       install:
         - bash <(curl -fsSL https://mesg.com/install)
         - yarn
+      script: true
     - stage: validate
       name: lint code
       install: true
