@@ -35,8 +35,8 @@ jobs:
       install:
         - "[ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)"
       before_script:
-        - mesg-core service deploy
-        - mesg-core service start com.mesg.pusher
+        - chmod +x ./mesg.sh
+        - sh ./mesg.sh
       script: yarn test
       after_script:
         - mesg-core stop
