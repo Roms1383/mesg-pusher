@@ -10,6 +10,6 @@ module.exports = async (input, { success, error }) => {
     return success({ channels })
   } catch (e) {
     console.error(e)
-    return error(e)
+    return error({ error: e })
   }
 }

@@ -28,6 +28,10 @@ jobs:
       script: mesg-core service validate
     - stage: tests
       install: true
+      skip_cleanup: true
+      before_script:
+        - mesg-core service deploy
+        - mesg-core service start com.mesg.pusher
       script: yarn test || travis_terminate 1;
     - stage: release
       if: branch = release AND NOT tag AND type NOT IN (pull_request)

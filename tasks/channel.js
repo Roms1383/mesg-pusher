@@ -12,6 +12,6 @@ module.exports = async (input, { success, error }) => {
     return success({ occupied, user_count, subscription_count })
   } catch (e) {
     console.error(e)
-    return error(e)
+    return error({ error: e })
   }
 }
