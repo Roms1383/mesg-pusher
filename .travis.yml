@@ -5,6 +5,8 @@ cache:
   npm: true
   directories:
     - node_modules
+    - usr/local/bin/mesg-core
+    - ~/.mesg
 git:
   submodules: false
 before_install:
