@@ -31,6 +31,8 @@ stages:
 jobs:
   include:
     - stage: install
+      name: install required environment
+      script: echo "installed!"
     - stage: validate
       name: lint code
       script: yarn eslint '*.js'
