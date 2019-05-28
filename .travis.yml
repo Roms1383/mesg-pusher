@@ -26,7 +26,7 @@ jobs:
     - stage: validate
       name: validate MESG file
       install:
-        - [ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)
+        - "[ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)"
       before_script:
         - mesg-core start
       script: mesg-core service validate
@@ -35,7 +35,7 @@ jobs:
     - stage: tests
       name: integration tests
       install:
-        - [ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)
+        - "[ ! -e /usr/local/bin/mesg-core ] && bash <(curl -fsSL https://mesg.com/install)"
       before_script:
         - mesg-core start
         - mesg-core service deploy
