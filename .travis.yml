@@ -19,9 +19,11 @@ before_install:
   - yarn
 jobs:
   include:
-    - stage: lint
+    - stage: validate
+      name: Lint
       script: yarn eslint '*.js'
     - stage: validate
+      name: Validate
       before_script:
         - bash <(curl -fsSL https://mesg.com/install)
         - mesg-core start
