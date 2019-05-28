@@ -35,6 +35,7 @@ jobs:
         - bash <(curl -fsSL https://mesg.com/install)
       before_script:
         - mesg-core start
+        - sleep 3
         - mesg-core service deploy
         - mesg-core service start com.mesg.pusher
       script: yarn test
