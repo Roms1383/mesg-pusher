@@ -7,7 +7,7 @@ cache:
     - node_modules
 git:
   submodules: false
-before_install:
+install:
   - echo "updating NPM..."
   - npm i -g npm@6.9.0
   - echo "updating Yarn..."
@@ -40,11 +40,13 @@ jobs:
       name: validate MESG file
       script: mesg-core service validate
     - stage: tests
+      name: integration tests
       before_script:
         - mesg-core service deploy
         - mesg-core service start com.mesg.pusher
       script: yarn test || travis_terminate 1;
     - stage: release
+      name: semantic release
       script: yarn semantic-release --branch $TRAVIS_BRANCH
 matrix:
   fast_finish: true
