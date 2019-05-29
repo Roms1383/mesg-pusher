@@ -71,7 +71,6 @@ module.exports = {
       noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
     },
   },
-  npmPublish: false,
   assets: [
     'package.json',
     'yarn.lock',
