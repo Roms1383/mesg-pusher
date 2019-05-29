@@ -11,6 +11,6 @@ module.exports = (input, { success, error }) => {
     return success({ message: 'sent' })
   } catch (e) {
     console.error(e)
-    return error(e)
+    return error({ error: e })
   }
 }

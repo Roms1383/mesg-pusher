@@ -1,6 +1,6 @@
 node_modules
 my-tests/
-**/*.test.js
+*.test.js
 .commitlintrc.js
 .eslintignore
 .eslintrc.yml

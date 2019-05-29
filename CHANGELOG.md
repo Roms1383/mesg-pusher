@@ -1,3 +1,5 @@
+# [2.0.0](https://github.com/Roms1383/mesg-pusher/compare/v1.1.0...v2.0.0) (2019-05-29)
+
 # [1.1.0](https://github.com/Roms1383/mesg-pusher/compare/v1.0.14...v1.1.0) (2019-05-28)
 
 ## [1.0.14](https://github.com/Roms1383/mesg-pusher/compare/v1.0.13...v1.0.14) (2018-09-29)

@@ -1,6 +1,6 @@
 {
   "name": "@mesg/pusher",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "MESG Service to interact with Pusher",
   "main": "index.js",
   "repository": {
@@ -44,14 +44,15 @@
     "mesg:dev": "yarn clean && yarn build && mesg-core service dev",
     "mesg:quick-dev": "mesg-core service dev",
     "mesg:doc": "mesg-core service gen-doc",
+    "mesg:validate": "mesg-core service validate",
     "docs:dev": "yarn vuepress dev docs",
     "docs:build": "yarn vuepress build docs",
     "cli:commit": "gitmoji -c",
     "cli:list": "gitmoji -l",
     "cli:configure": "gitmoji -g",
-    "code:lint": "eslint --fix './**/*.js'",
-    "unit:test": "jest --env=node --verbose",
-    "code:coverage": "jest --env=node --coverage",
+    "code:lint": "eslint --fix '*.js'",
+    "unit:test": "jest --env=node --verbose --detectOpenHandles --forceExit",
+    "code:coverage": "jest --env=node --detectOpenHandles --forceExit --coverage",
     "test": "yarn unit:test"
   }
 }

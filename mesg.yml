@@ -6,13 +6,13 @@ configuration:
     - PUSHER_APP_ID=
     - PUSHER_APP_KEY=
     - PUSHER_APP_SECRET=
-    - PUSHER_ENCRYPTED=
+    - PUSHER_USE_TLS=
     - PUSHER_CLUSTER=
     - PUSHER_HOST=
     - PUSHER_PORT=
     - PUSHER_PROXY=
     - PUSHER_TIMEOUT=
-    - PUSHER_KEEPALIVE=
+    - PUSHER_KEEP_ALIVE=
 tasks:
   trigger:
     description: triggers an event on one or more channels
@@ -29,7 +29,7 @@ tasks:
         type: String
         description: Pusher application secret key
         optional: true
-      encrypted: &encrypted
+      useTLS: &useTLS
         type: Boolean
         description: whether to encrypt notification, defaults to false
         optional: true
@@ -43,7 +43,7 @@ tasks:
         optional: true
       port: &port
         type: Number
-        description: whether to use a different port, defaults to 80 for unencrypted and 443 for encrypted
+        description: whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS
         optional: true
       proxy: &proxy
         type: String
@@ -57,17 +57,17 @@ tasks:
         type: Boolean
         description: enables keep-alive, defaults to false
         optional: true
-      name:
+      name: &name
         type: String
         description: event name
-      data:
+      data: &data
         type: Object
         description: event data (maximum 10Kb)
       channels:
         type: Object
         description: array of one or more channel names - limited to 100 channels
         optional: true
-      channel:
+      channel: &channel
         type: String
         description: channel name if publishing to a single channel (can be used instead of channels)
         optional: true
@@ -92,7 +92,7 @@ tasks:
       appId: *appId
       key: *key
       secret: *secret
-      encrypted: *encrypted
+      useTLS: *useTLS
       cluster: *cluster
       host: *host
       port: *port
@@ -101,6 +101,11 @@ tasks:
       keepAlive: *keepAlive
       batch:
         type: Object
+        object:
+          channel: *channel
+          name: *name
+          data: *data
+        repeated: true
         description: array of events (maximum 10)
     outputs:
       success:
@@ -117,7 +122,7 @@ tasks:
       appId: *appId
       key: *key
       secret: *secret
-      encrypted: *encrypted
+      useTLS: *useTLS
       cluster: *cluster
       host: *host
       port: *port
@@ -132,7 +137,8 @@ tasks:
       success:
         data:
           channels:
-            type: Object
+            type: String
+            repeated: true
             description: array of channel names
       error:
         data:
@@ -143,7 +149,7 @@ tasks:
       appId: *appId
       key: *key
       secret: *secret
-      encrypted: *encrypted
+      useTLS: *useTLS
       cluster: *cluster
       host: *host
       port: *port
