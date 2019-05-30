@@ -1,5 +1,5 @@
 {
-  "name": "@mesg/pusher",
+  "name": "mesg-pusher",
   "version": "2.0.2",
   "description": "MESG Service to interact with Pusher",
   "main": "index.js",
