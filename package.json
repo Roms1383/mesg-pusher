@@ -58,5 +58,8 @@
     "unit:test": "jest --env=node --verbose --detectOpenHandles --forceExit",
     "code:coverage": "jest --env=node --detectOpenHandles --forceExit --coverage",
     "test": "yarn unit:test"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
