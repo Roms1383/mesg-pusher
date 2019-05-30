@@ -1,4 +1,4 @@
-# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![mesg-core](https://img.shields.io/badge/mesg--core-0.9-blueviolet.svg)](https://github.com/mesg-foundation/engine.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-2.0.1-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![mesg-core](https://img.shields.io/badge/mesg--core-0.9-blueviolet.svg)](https://github.com/mesg-foundation/engine.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
@@ -116,6 +116,35 @@ As usual, user inputs always takes precedence on defined environment variables.
 | **proxy** | `PUSHER_PROXY` |
 | **secret** | `PUSHER_APP_SECRET` |
 | **timeout** | `PUSHER_TIMEOUT` |
+
+## Integration tests
+
+At the moment the integration tests are not yet supported correctly when run on `Travis`, but they can still be launched locally.
+
+In order to launch them locally you will have to pass the environment variables along with your command, like so :
+
+*  via command line arguments :
+    ```bash
+    mesg-core service stop com.mesg.pusher && mesg-core service deploy --env PUSHER_APP_ID=... --env    PUSHER_APP_KEY=... --env PUSHER_APP_SECRET=... --env PUSHER_CLUSTER=... && mesg-core service start com.mesg.pusher && yarn test
+    ```
+*  via `.env` file :
+   *  file
+      ```
+      PUSHER_APP_ID=...
+      PUSHER_APP_KEY=...
+      PUSHER_APP_SECRET=...
+      PUSHER_CLUSTER=...
+      ```
+   *  command
+      ```bash
+      mesg-core service stop com.mesg.pusher && mesg-core service deploy $(while read line; do echo "--env $line"; done < .env) && mesg-core service start com.mesg.pusher && yarn test
+      ```
+      or simply
+      ```bash
+      yarn mesg:test
+      ```
+
+Hopefully in the future they will :pray:
 
 ***
 

@@ -1,6 +1,6 @@
 {
   "name": "@mesg/pusher",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "MESG Service to interact with Pusher",
   "main": "index.js",
   "repository": {
@@ -45,6 +45,10 @@
     "mesg:quick-dev": "mesg-core service dev",
     "mesg:doc": "mesg-core service gen-doc",
     "mesg:validate": "mesg-core service validate",
+    "mesg:start": "mesg-core service start com.mesg.pusher",
+    "mesg:stop": "mesg-core service stop com.mesg.pusher",
+    "mesg:deploy": "mesg-core service deploy $(while read line; do echo \"--env $line\"; done < .env)",
+    "mesg:test": "echo 'stopping service...' && yarn mesg:stop --no-spinner && echo '🆗 service stopped' && echo 'deploying service...' && yarn mesg:deploy --no-spinner && echo '🆗 service deployed' && echo 'starting service...' && yarn mesg:start --no-spinner && echo '🆗 service started' && yarn test",
     "docs:dev": "yarn vuepress dev docs",
     "docs:build": "yarn vuepress build docs",
     "cli:commit": "gitmoji -c",
