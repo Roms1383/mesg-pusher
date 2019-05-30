@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged && yarn mesg:validate
   commit-msg: commitlint -E HUSKY_GIT_PARAMS
-  pre-push: yarn code:lint && yarn unit:test
+  pre-push: yarn mesg:test

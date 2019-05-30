@@ -117,6 +117,35 @@ As usual, user inputs always takes precedence on defined environment variables.
 | **secret** | `PUSHER_APP_SECRET` |
 | **timeout** | `PUSHER_TIMEOUT` |
 
+## Integration tests
+
+At the moment the integration tests are not yet supported correctly when run on `Travis`, but they can still be launched locally.
+
+In order to launch them locally you will have to pass the environment variables along with your command, like so :
+
+*  via command line arguments :
+    ```bash
+    mesg-core service stop com.mesg.pusher && mesg-core service deploy --env PUSHER_APP_ID=... --env    PUSHER_APP_KEY=... --env PUSHER_APP_SECRET=... --env PUSHER_CLUSTER=... && mesg-core service start com.mesg.pusher && yarn test
+    ```
+*  via `.env` file :
+   *  file
+      ```
+      PUSHER_APP_ID=...
+      PUSHER_APP_KEY=...
+      PUSHER_APP_SECRET=...
+      PUSHER_CLUSTER=...
+      ```
+   *  command
+      ```bash
+      mesg-core service stop com.mesg.pusher && mesg-core service deploy $(while read line; do echo "--env $line"; done < .env) && mesg-core service start com.mesg.pusher && yarn test
+      ```
+      or simply
+      ```bash
+      yarn mesg:test
+      ```
+
+Hopefully in the future they will :pray:
+
 ***
 
 # Definitions
