@@ -1,4 +1,4 @@
-# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![mesg-core](https://img.shields.io/badge/mesg--core-0.9-blueviolet.svg)](https://github.com/mesg-foundation/engine.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-2.0.1-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![mesg-core](https://img.shields.io/badge/mesg--core-0.9-blueviolet.svg)](https://github.com/mesg-foundation/engine.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 
