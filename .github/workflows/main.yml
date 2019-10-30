@@ -45,6 +45,7 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
           source $HOME/.bashrc
+          docker swarm init
           npm install -g mesg-cli
           mesg-cli daemon:start
           mesg-cli account:create $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE
