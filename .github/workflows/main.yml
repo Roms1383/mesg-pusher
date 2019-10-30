@@ -49,8 +49,9 @@ jobs:
           npm install -g mesg-cli
           mesg-cli daemon:start
           mesg-cli account:create $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE
-          echo "##[set-output name=MESG_HASH;]$(mesg-cli service:create "$(mesg-cli service:compile)" --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE)"
-          mesg-cli service:start ${{ steps.nvm.outputs.MESG_HASH }} --env PUSHER_APP_ID=$PUSHER_APP_ID --env PUSHER_APP_KEY=$PUSHER_APP_KEY --env PUSHER_APP_SECRET=$PUSHER_APP_SECRET --env PUSHER_CLUSTER=$PUSHER_CLUSTER
+          MESG_HASH=$(mesg-cli service:create "$(mesg-cli service:compile)" --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE)
+          mesg-cli service:start $MESG_HASH --env PUSHER_APP_ID=$PUSHER_APP_ID --env PUSHER_APP_KEY=$PUSHER_APP_KEY --env PUSHER_APP_SECRET=$PUSHER_APP_SECRET --env PUSHER_CLUSTER=$PUSHER_CLUSTER
+          echo "##[set-output name=MESG_HASH;]$(echo $MESG_HASH)"
         env:
           MESG_ACCOUNT: ${{ secrets.MESG_ACCOUNT }}
           MESG_PASSPHRASE: ${{ secrets.MESG_PASSPHRASE }}
