@@ -49,7 +49,7 @@ jobs:
           npm install -g mesg-cli
           mesg-cli daemon:start
           mesg-cli account:create $MESG_ACCOUNT --passphrase=$MESG_PASSPHRASE
-          mesg-cli service:dev --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE
+          mesg-cli service:dev --account=$MESG_ACCOUNT --passphrase=$MESG_PASSPHRASE
       - name: Unit test
         run: |
           yarn
