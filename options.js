@@ -12,10 +12,10 @@ module.exports = ({
   keepAlive = yn(process.env.PUSHER_KEEP_ALIVE, { default: false })
 }) => {
   const options = { appId, key, secret, useTLS, keepAlive }
-  if (!appId) throw new Error(`options must contain application ID`)
-  if (!key) throw new Error(`options must contain application key`)
-  if (!secret) throw new Error(`options must contain application secret key`)
-  if (!cluster && !host) throw new Error(`options must contain either cluster or host`)
+  if (!appId) throw new Error('options must contain application ID')
+  if (!key) throw new Error('options must contain application key')
+  if (!secret) throw new Error('options must contain application secret key')
+  if (!cluster && !host) throw new Error('options must contain either cluster or host')
   if (cluster) options.cluster = cluster
   if (host) options.host = host
   if (!port) options.port = useTLS ? 443 : 80
