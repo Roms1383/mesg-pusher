@@ -49,7 +49,8 @@ jobs:
           npm install -g mesg-cli
           mesg-cli daemon:start
           mesg-cli account:create $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE
-          mesg-cli service:dev --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE --env PUSHER_APP_ID=$PUSHER_APP_ID --env PUSHER_APP_KEY=$PUSHER_APP_KEY --env PUSHER_APP_SECRET=$PUSHER_APP_SECRET --env PUSHER_CLUSTER=$PUSHER_CLUSTER
+          echo "##[set-output name=MESG_HASH;]$(mesg-cli service:create "$(mesg-cli service:compile)" --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE)"
+          mesg-cli service:start ${{ steps.nvm.outputs.MESG_HASH }} --env PUSHER_APP_ID=$PUSHER_APP_ID --env PUSHER_APP_KEY=$PUSHER_APP_KEY --env PUSHER_APP_SECRET=$PUSHER_APP_SECRET --env PUSHER_CLUSTER=$PUSHER_CLUSTER
         env:
           MESG_ACCOUNT: ${{ secrets.MESG_ACCOUNT }}
           MESG_PASSPHRASE: ${{ secrets.MESG_PASSPHRASE }}
@@ -57,6 +58,7 @@ jobs:
           PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
           PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
+        id: mesg
       - name: Unit test
         run: |
           yarn
@@ -66,6 +68,10 @@ jobs:
           PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
           PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
+      - name: Shutdown MESG service
+        run: |
+          mesg-cli service:stop ${{ steps.nvm.outputs.MESG_HASH }}
+          mesg-cli daemon:stop
   release:
     name: Semantic release
     if: github.ref == 'refs/heads/master'
