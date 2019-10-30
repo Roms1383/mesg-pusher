@@ -47,6 +47,7 @@ jobs:
           export PATH="$HOME/.yarn/bin:$PATH"
       - name: Launch MESG service
         run: |
+          yarn global add mesg-cli
           mesg-cli daemon:start
           mesg-cli service:dev --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE
       - name: Unit test
