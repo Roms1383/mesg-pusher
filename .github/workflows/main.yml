@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Use NVM
-        uses: dcodeIO/setup-node-nvm@v2
+        uses: dcodeIO/setup-node-nvm@master
       - name: Use NPM and Yarn
         run: |
           npm i -g npm@$NPM
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Use NVM
-        uses: dcodeIO/setup-node-nvm@v2
+        uses: dcodeIO/setup-node-nvm@master
       - name: Use NPM and Yarn
         run: |
           npm i -g npm@$NPM
@@ -55,7 +55,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Use NVM
-        uses: dcodeIO/setup-node-nvm@v2
+        uses: dcodeIO/setup-node-nvm@master
       - name: Use NPM and Yarn
         run: |
           npm i -g npm@$NPM
