@@ -11,13 +11,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+      - name: Use NVM
+        uses: dcodeIO/setup-node-nvm@master
       - name: Use NPM and Yarn
         run: |
           npm i -g npm@$NPM
@@ -33,13 +28,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+      - name: Use NVM
+        uses: dcodeIO/setup-node-nvm@master
       - name: Use NPM and Yarn
         run: |
           npm i -g npm@$NPM
@@ -62,13 +52,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+      - name: Use NVM
+        uses: dcodeIO/setup-node-nvm@master
       - name: Use NPM and Yarn
         run: |
           npm i -g npm@$NPM
