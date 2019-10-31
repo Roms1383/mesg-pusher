@@ -48,7 +48,7 @@ jobs:
       - name: Unit test
         run: |
           docker swarm init
-          npm install -g mesg-cli
+          npm install -g mesg-cli codacy-coverage
           yarn
           yarn test --coverage
           cat ./coverage/lcov.info | codacy-coverage
