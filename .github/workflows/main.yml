@@ -47,11 +47,14 @@ jobs:
           export PATH="$HOME/.yarn/bin:$PATH"
       - name: Unit test
         run: |
-          docker swarm init
+          echo "Unit tests"
           npm install -g mesg-cli codacy-coverage
           yarn
-          yarn test --coverage
-          cat ./coverage/lcov.info | codacy-coverage
+          yarn spec --coverage
+          yarn coverage
+          echo "Integration test"
+          docker swarm init
+          yarn test
         env:
           MESG_ACCOUNT: ${{ secrets.MESG_ACCOUNT }}
           MESG_PASSPHRASE: ${{ secrets.MESG_PASSPHRASE }}
