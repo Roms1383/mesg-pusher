@@ -1,6 +1,7 @@
 name: mesg-pusher
 sid: com.mesg.pusher
 description: MESG Service for [Pusher](https://pusher.com/docs/server_api_guide)
+repository: https://github.com/Roms1383/mesg-pusher
 configuration:
   env:
     - PUSHER_APP_ID=
@@ -76,16 +77,9 @@ tasks:
         description: excludes the event from being sent to a specific connection
         optional: true
     outputs:
-      success:
-        data:
-          message:
-            description: a dummy 'sent' message
-            type: String
-      error:
-        data:
-          error: &error
-            type: String
-            description: error
+      message:
+        description: a dummy 'sent' message
+        type: String
   triggerBatch:
     description: triggers multiple events in a single call (up to 10 per call on the multi-tenant clusters)
     inputs:
@@ -108,14 +102,9 @@ tasks:
         repeated: true
         description: array of events (maximum 10)
     outputs:
-      success:
-        data:
-          message:
-            description: a dummy 'sent' message
-            type: String
-      error:
-        data:
-          error: *error
+      message:
+        description: a dummy 'sent' message
+        type: String
   channels:
     description: get the list of the channel within an application that have active subscriptions (also referred to as being **occupied**) 
     inputs:
@@ -134,15 +123,10 @@ tasks:
         description: additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api))
         optional: true
     outputs:
-      success:
-        data:
-          channels:
-            type: String
-            repeated: true
-            description: array of channel names
-      error:
-        data:
-          error: *error
+      channels:
+        type: String
+        repeated: true
+        description: array of channel names
   channel:
     description: fetch one or some attributes for a given channel
     inputs:
@@ -161,19 +145,14 @@ tasks:
         description: additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api))
         optional: true
     outputs:
-      success:
-        data:
-          occupied:
-            type: Boolean
-            description: whether the channel currently has active subscriptions
-          user_count:
-            type: Number
-            description: number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one)
-            optional: true
-          subscription_count:
-            type: Number
-            description: number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard)
-            optional: true
-      error:
-        data:
-          error: *error
+      occupied:
+        type: Boolean
+        description: whether the channel currently has active subscriptions
+      user_count:
+        type: Number
+        description: number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one)
+        optional: true
+      subscription_count:
+        type: Number
+        description: number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard)
+        optional: true

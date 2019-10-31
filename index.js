@@ -9,5 +9,5 @@ const pusher = new Pusher('KEY', { cluster: 'CLUSTER', forceTLS: true })
 const CHANNEL = 'some-channel'
 const EVENT = 'some-event'
 const channel = pusher.subscribe(CHANNEL)
-channel.bind(EVENT, data => { MESG.emitEvent('received', Object.assign({}, { channel: CHANNEL, event: EVENT }, data) })
+channel.bind(EVENT, data => { MESG.emitEvent('received', { channel: CHANNEL, event: EVENT, ...data })
  */

@@ -1,39 +1,38 @@
-# mesg-pusher [![mesg-pusher](https://img.shields.io/badge/version-2.0.3-blue.svg)](https://github.com/Roms1383/mesg-pusher.git) [![mesg-core](https://img.shields.io/badge/mesg--core-0.9-blueviolet.svg)](https://github.com/mesg-foundation/engine.git) [![Build Status](https://travis-ci.com/Roms1383/mesg-pusher.svg?branch=master)](https://travis-ci.com/Roms1383/mesg-pusher) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+# mesg-pusher [![License](https://badgen.net/badge/license/MIT/blue)](LICENSE) [![Latest Release](https://badgen.net/github/release/Roms1383/mesg-pusher)](https://www.npmjs.com/package/mesg-pusher) ![Build Status](https://github.com/Roms1383/mesg-pusher/workflows/build/badge.svg) [![mesg-cli](https://img.shields.io/badge/mesg--cli-2.0.1-blueviolet.svg)](https://github.com/mesg-foundation/engine.git)  [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Dependencies](https://david-dm.org/Roms1383/mesg-pusher.svg)](https://david-dm.org/)
 
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
+ID: `com.mesg.pusher`
 
 [![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
-# Contents
+## Contents
 
-- [Installation](#Installation)
-- [Features](#Features)
-- [Definitions](#Definitions)
-  
-  - [Tasks](#Tasks)
-    - [channel](#channel)
-    - [channels](#channels)
-    - [trigger](#trigger)
-    - [triggerBatch](#triggerbatch)
+*   [Installation](#installation)
+    *   [MESG SDK](#MESG-SDK)
+    *   [Deploy the Service](#Service)
+*   [Definitions](#Definitions)
+    *   [Tasks](#Tasks)
+        *   [trigger](#trigger)
+        *   [triggerBatch](#triggerBatch)
+        *   [channels](#channels)
+        *   [channel](#channel)
 
 # Installation
 
-## MESG Core
+### MESG SDK
 
-This service requires [MESG Core](https://github.com/mesg-foundation/core) to be installed first.
+This service requires [MESG SDK](https://github.com/mesg-foundation/engine) to be installed first.
 
-You can install MESG Core by running the following command or [follow the installation guide](https://docs.mesg.com/guide/start-here/installation.html).
-
-```bash
-bash <(curl -fsSL https://mesg.com/install)
-```
-
-## Service
+You can install MESG SDK by running the following command or [follow the installation guide](https://docs.mesg.com/guide/start-here/installation.html).
 
 ```bash
-mesg-core service deploy https://github.com/Roms1383/mesg-pusher
+npm install -g mesg-cli
 ```
+
+### Deploy the Service
+
+To deploy this service, go to [this service page](https://marketplace.mesg.com/services/com.mesg.pusher) on the [MESG Marketplace](https://marketplace.mesg.com) and click the button "get/buy this service".
 
 # Features
 
@@ -61,46 +60,30 @@ Create a socket connection to listen and react to `Pusher` notifications :
 
 ```js
 // in a MESG Application
-const MESG = require('mesg-js').application()
+const { application } = require('mesg-js')
+const mesg = application()
 const Pusher = require('pusher-js')
 const pusher = new Pusher('PUSHER_APP_KEY', { cluster: 'PUSHER_CLUSTER', forceTLS: true }) // replace with your credentials
+const INSTANCE_HASH = await mesg.resolve('com.mesg.pusher')
 const CHANNEL = 'some-channel'
 const EVENT = 'some-event'
-const channel = pusher.subscribe(CHANNEL)
 const CREDENTIALS = { appId: 'PUSHER_APP_ID', key: 'PUSHER_APP_KEY', secret: 'PUSHER_APP_SECRET' } // replace with your credentials
+// subscribe to Pusher channel
+const channel = pusher.subscribe(CHANNEL)
 // on Pusher notification received
 channel.bind(EVENT, data => {
   // example : launch MESG service trigger task
-  MESG.api.ExecuteTask({
-    serviceID: 'com.mesg.pusher',
+  mesg.executeTask({
+    instanceHash: INSTANCE_HASH,
     taskKey: 'trigger',
-    inputData: JSON.stringify({ ...CREDENTIALS, channel: CHANNEL, event: EVENT, ...data })
-  }, (err, reply) => {
-    // handle response if needed
+    inputs: mesg.encodeData({ ...CREDENTIALS, channel: CHANNEL, event: EVENT, ...data })
   })
 })
 ```
 
 ## Environment variables
 
-Instead of providing Pusher credentials or options on each request
-e.g.
-```js
-...
-const CREDENTIALS = { appId: 'PUSHER_APP_ID', key: 'PUSHER_APP_KEY', secret: 'PUSHER_APP_SECRET' } // replace with your credentials
-MESG.api.ExecuteTask({
-  serviceID: 'com.mesg.pusher',
-  taskKey: 'trigger',
-  inputData: JSON.stringify({ ...CREDENTIALS, channel: CHANNEL, event: EVENT, ...data })
-}, (err, reply) => {
-  // ...
-})
-...
-```
-These can be defined when deploying the service as environment variables :
-```sh
-mesg-core service deploy . --env PUSHER_APP_ID=YOUR_PUSHER_APP_ID --env PUSHER_APP_SECRET=YOUR_PUSHER_APP_SECRET --env PUSHER_APP_KEY=YOUR_PUSHER_APP_KEY
-```
+Instead of providing Pusher credentials or options on each request, these can be provided via command line arguments or `.env` file, as shown below in [Integration tests](#integration-tests).
 
 As usual, user inputs always takes precedence on defined environment variables.
 
@@ -108,7 +91,7 @@ As usual, user inputs always takes precedence on defined environment variables.
 | --- | --- |
 | **appId** | `PUSHER_APP_ID` |
 | **cluster** | `PUSHER_CLUSTER` |
-| **useTLS** | `PUSHER_useTLS` |
+| **useTLS** | `PUSHER_USE_TLS` |
 | **host** | `PUSHER_HOST` |
 | **keepAlive** | `PUSHER_KEEP_ALIVE` |
 | **key** | `PUSHER_APP_KEY` |
@@ -119,223 +102,147 @@ As usual, user inputs always takes precedence on defined environment variables.
 
 ## Integration tests
 
-At the moment the integration tests are not yet supported correctly when run on `Travis`, but they can still be launched locally.
-
 In order to launch them locally you will have to pass the environment variables along with your command, like so :
 
-*  via command line arguments :
+*   via command line arguments :
     ```bash
-    mesg-core service stop com.mesg.pusher && mesg-core service deploy --env PUSHER_APP_ID=... --env    PUSHER_APP_KEY=... --env PUSHER_APP_SECRET=... --env PUSHER_CLUSTER=... && mesg-core service start com.mesg.pusher && yarn test
+    export PUSHER_APP_ID=... && export PUSHER_APP_KEY=... && export PUSHER_APP_SECRET=... && export PUSHER_CLUSTER=... && export MESG_ACCOUNT=... && export MESG_PASSPHRASE=... && yarn test
     ```
-*  via `.env` file :
-   *  file
-      ```
-      PUSHER_APP_ID=...
-      PUSHER_APP_KEY=...
-      PUSHER_APP_SECRET=...
-      PUSHER_CLUSTER=...
-      ```
-   *  command
-      ```bash
-      mesg-core service stop com.mesg.pusher && mesg-core service deploy $(while read line; do echo "--env $line"; done < .env) && mesg-core service start com.mesg.pusher && yarn test
-      ```
-      or simply
-      ```bash
-      yarn mesg:test
-      ```
-
-Hopefully in the future they will :pray:
+*   via `.env` file :
+    *   file
+        ```
+        export PUSHER_APP_ID=...
+        export PUSHER_APP_KEY=...
+        export PUSHER_APP_SECRET=...
+        export PUSHER_CLUSTER=...
+        export MESG_ACCOUNT=...
+        export MESG_PASSPHRASE=...
+        ```
+    *   command
+        ```bash
+        source .env && yarn test
+        ```
 
 ***
 
-# Definitions
+## Definitions
 
 
-# Tasks
+### Tasks
 
-## channel
-
-Task key: `channel`
-
-fetch one or some attributes for a given channel
-
-### Inputs
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **appId** | `appId` | `String` | **`optional`** Pusher application ID |
-| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
-| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
-| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
-| **key** | `key` | `String` | **`optional`** Pusher application key |
-| **params** | `params` | `Object` | **`optional`** additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
-| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS |
-| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
-| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
-| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
-
-### Outputs
-
-#### error
-
-Output key: `error`
-
-
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **error** | `error` | `String` | error |
-
-#### success
-
-Output key: `success`
-
-
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **occupied** | `occupied` | `Boolean` | whether the channel currently has active subscriptions |
-| **subscription_count** | `subscription_count` | `Number` | **`optional`** number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard) |
-| **user_count** | `user_count` | `Number` | **`optional`** number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one) |
-
-
-## channels
-
-Task key: `channels`
-
-get the list of the channel within an application that have active subscriptions (also referred to as being **occupied**)
-
-### Inputs
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **appId** | `appId` | `String` | **`optional`** Pusher application ID |
-| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
-| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
-| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
-| **key** | `key` | `String` | **`optional`** Pusher application key |
-| **params** | `params` | `Object` | **`optional`** additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
-| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS |
-| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
-| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
-| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
-
-### Outputs
-
-#### error
-
-Output key: `error`
-
-
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **error** | `error` | `String` | error |
-
-#### success
-
-Output key: `success`
-
-
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **channels** | `channels` | `Object` | array of channel names |
-
-
-## trigger
+<h4 id="trigger">trigger</h4>
 
 Task key: `trigger`
 
 triggers an event on one or more channels
 
-### Inputs
+##### Inputs
 
 | **Name** | **Key** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | **appId** | `appId` | `String` | **`optional`** Pusher application ID |
-| **channel** | `channel` | `String` | **`optional`** channel name if publishing to a single channel (can be used instead of channels) |
-| **channels** | `channels` | `Object` | **`optional`** array of one or more channel names - limited to 100 channels |
-| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
-| **data** | `data` | `Object` | event data (maximum 10Kb) |
-| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
-| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
 | **key** | `key` | `String` | **`optional`** Pusher application key |
-| **name** | `name` | `String` | event name |
+| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
+| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **cluster** | `cluster` | `String` | **`optional`** if &#x60;host&#x60; is present, it will override the &#x60;cluster&#x60; option |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
 | **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS |
 | **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
-| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
-| **socket_id** | `socket_id` | `Object` | **`optional`** excludes the event from being sent to a specific connection |
 | **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
-
-### Outputs
-
-#### error
-
-Output key: `error`
-
-
-
-| **Name** | **Key** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| **error** | `error` | `String` | error |
-
-#### success
-
-Output key: `success`
-
-
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **name** | `name` | `String` | event name |
+| **data** | `data` | `Object` | event data (maximum 10Kb) |
+| **channels** | `channels` | `Object` | **`optional`** array of one or more channel names - limited to 100 channels |
+| **channel** | `channel` | `String` | **`optional`** channel name if publishing to a single channel (can be used instead of channels) |
+| **socket_id** | `socket_id` | `Object` | **`optional`** excludes the event from being sent to a specific connection |
+  
+##### Outputs
 
 | **Name** | **Key** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| **message** | `message` | `String` | a dummy 'sent' message |
-
-
-## triggerBatch
+| **message** | `message` | `String` | a dummy &#x27;sent&#x27; message |
+<h4 id="triggerBatch">triggerBatch</h4>
 
 Task key: `triggerBatch`
 
 triggers multiple events in a single call (up to 10 per call on the multi-tenant clusters)
 
-### Inputs
+##### Inputs
 
 | **Name** | **Key** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | **appId** | `appId` | `String` | **`optional`** Pusher application ID |
-| **batch** | `batch` | `Object` | array of events (maximum 10) |
-| **cluster** | `cluster` | `String` | **`optional`** if `host` is present, it will override the `cluster` option |
-| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
-| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
-| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
 | **key** | `key` | `String` | **`optional`** Pusher application key |
+| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
+| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **cluster** | `cluster` | `String` | **`optional`** if &#x60;host&#x60; is present, it will override the &#x60;cluster&#x60; option |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
 | **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS |
 | **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
-| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
 | **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
-
-### Outputs
-
-#### error
-
-Output key: `error`
-
-
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **batch** | `batch` | `Object` | array of events (maximum 10) |
+  
+##### Outputs
 
 | **Name** | **Key** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| **error** | `error` | `String` | error |
+| **message** | `message` | `String` | a dummy &#x27;sent&#x27; message |
+<h4 id="channels">channels</h4>
 
-#### success
+Task key: `channels`
 
-Output key: `success`
+get the list of the channel within an application that have active subscriptions (also referred to as being **occupied**)
 
-
+##### Inputs
 
 | **Name** | **Key** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| **message** | `message` | `String` | a dummy 'sent' message |
+| **appId** | `appId` | `String` | **`optional`** Pusher application ID |
+| **key** | `key` | `String` | **`optional`** Pusher application key |
+| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
+| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **cluster** | `cluster` | `String` | **`optional`** if &#x60;host&#x60; is present, it will override the &#x60;cluster&#x60; option |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
+| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS |
+| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
+| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **params** | `params` | `Object` | **`optional`** additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
+  
+##### Outputs
+
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **channels** | `channels` | `String` | array of channel names |
+<h4 id="channel">channel</h4>
+
+Task key: `channel`
+
+fetch one or some attributes for a given channel
+
+##### Inputs
+
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **appId** | `appId` | `String` | **`optional`** Pusher application ID |
+| **key** | `key` | `String` | **`optional`** Pusher application key |
+| **secret** | `secret` | `String` | **`optional`** Pusher application secret key |
+| **useTLS** | `useTLS` | `Boolean` | **`optional`** whether to encrypt notification, defaults to false |
+| **cluster** | `cluster` | `String` | **`optional`** if &#x60;host&#x60; is present, it will override the &#x60;cluster&#x60; option |
+| **host** | `host` | `String` | **`optional`** whether to use a different host, defaults to api.pusherapp.com |
+| **port** | `port` | `Number` | **`optional`** whether to use a different port, defaults to 80 for unuseTLS and 443 for useTLS |
+| **proxy** | `proxy` | `String` | **`optional`** URL to proxy the requests through |
+| **timeout** | `timeout` | `Number` | **`optional`** timeout for all requests in milliseconds |
+| **keepAlive** | `keepAlive` | `Boolean` | **`optional`** enables keep-alive, defaults to false |
+| **params** | `params` | `Object` | **`optional`** additional parameters to be sent as query string parameters (see [HTTP API Reference](https://pusher.com/docs/rest_api)) |
+  
+##### Outputs
+
+| **Name** | **Key** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **occupied** | `occupied` | `Boolean` | whether the channel currently has active subscriptions |
+| **user_count** | `user_count` | `Number` | **`optional`** number of distinct users currently subscribed to this channel (a single user may be subscribed many times, but will only count as one) |
+| **subscription_count** | `subscription_count` | `Number` | **`optional`** number of connections currently subscribed to this channel (not available by default, has to be enabled in dashboard) |
 
 
