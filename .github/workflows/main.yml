@@ -49,14 +49,8 @@ jobs:
         run: |
           docker swarm init
           npm install -g mesg-cli
-          mesg-cli daemon:start
-          mesg-cli account:create $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE
-          MESG_SERVICE_HASH=$(mesg-cli service:create "$(mesg-cli service:compile)" --account $MESG_ACCOUNT --passphrase $MESG_PASSPHRASE --quiet)
-          MESG_INSTANCE_HASH=$(mesg-cli service:start $MESG_SERVICE_HASH --env PUSHER_APP_ID=$PUSHER_APP_ID --env PUSHER_APP_KEY=$PUSHER_APP_KEY --env PUSHER_APP_SECRET=$PUSHER_APP_SECRET --env PUSHER_CLUSTER=$PUSHER_CLUSTER --quiet)
           yarn
           yarn test
-          mesg-cli service:stop $MESG_INSTANCE_HASH
-          mesg-cli daemon:stop
         env:
           MESG_ACCOUNT: ${{ secrets.MESG_ACCOUNT }}
           MESG_PASSPHRASE: ${{ secrets.MESG_PASSPHRASE }}

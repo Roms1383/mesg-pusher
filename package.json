@@ -43,7 +43,9 @@
   },
   "scripts": {
     "lint": "yarn eslint '**/*.js' && yarn remark .",
+    "pretest": "./pretest.sh",
     "test": "jest --env=node --verbose --detectOpenHandles --forceExit",
+    "posttest": "./posttest.sh",
     "release": "yarn semantic-release",
     "coverage": "cat ./coverage/lcov.info | codacy-coverage"
   },
