@@ -3,10 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "MESG Service to interact with Pusher",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Roms1383/mesg-pusher.git"
-  },
+  "repository": "https://github.com/Roms1383/mesg-pusher.git",
   "author": "Romain KELIFA",
   "license": "MIT",
   "dependencies": {
@@ -48,8 +45,5 @@
     "posttest": "./posttest.sh",
     "release": "yarn semantic-release",
     "coverage": "cat ./coverage/lcov.info | codacy-coverage"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

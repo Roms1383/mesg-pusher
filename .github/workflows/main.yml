@@ -50,7 +50,8 @@ jobs:
           docker swarm init
           npm install -g mesg-cli
           yarn
-          yarn test
+          yarn test --coverage
+          cat ./coverage/lcov.info | codacy-coverage
         env:
           MESG_ACCOUNT: ${{ secrets.MESG_ACCOUNT }}
           MESG_PASSPHRASE: ${{ secrets.MESG_PASSPHRASE }}
@@ -58,6 +59,7 @@ jobs:
           PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
           PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
   release:
     name: Semantic release
     if: github.ref == 'refs/heads/master'
