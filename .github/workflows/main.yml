@@ -28,7 +28,7 @@ jobs:
           yarn
           yarn lint
   test:
-    name: Unit test
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -64,7 +64,7 @@ jobs:
           PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
   release:
-    name: Semantic release
+    name: Release
     if: github.ref == 'refs/heads/master'
     needs: [lint, test]
     runs-on: ubuntu-latest
