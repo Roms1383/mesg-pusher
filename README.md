@@ -3,7 +3,7 @@
 [MESG](https://docs.mesg.com) Service for [Pusher](https://pusher.com/docs/server_api_guide)
 ID: `com.mesg.pusher`
 
-[![MESG](./logo-mesg.svg)](https://mesg.com/) | [![Pusher](./logo-pusher.svg)](https://pusher.com/)
+[![MESG](https://github.com/Roms1383/mesg-pusher/blob/master/logo-mesg.svg)](https://mesg.com/) | [![Pusher](https://github.com/Roms1383/mesg-pusher/blob/master/logo-pusher.svg)](https://pusher.com/)
 --------------------------------------------- | ---------------------------------------------
 
 ## Contents
