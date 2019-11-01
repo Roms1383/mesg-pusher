@@ -2,7 +2,8 @@
 coverage
 node_modules
 my-tests
-*.test.js
+**/*.test.js
+**/*.spec.js
 .commitlintrc
 .eslintignore
 .eslintrc
