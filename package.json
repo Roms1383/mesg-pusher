@@ -6,6 +6,13 @@
   "repository": "https://github.com/Roms1383/mesg-pusher.git",
   "author": "Romain KELIFA",
   "license": "MIT",
+  "files": [
+    "**/!(*.spec|*.test|*.config).js",
+    "mesg.yml",
+    "Dockerfile",
+    ".mesgignore",
+    ".dockerignore"
+  ],
   "dependencies": {
     "mesg-js": "^5.0.0",
     "pusher": "^3.0.0",
