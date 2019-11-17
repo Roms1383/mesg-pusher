@@ -52,6 +52,10 @@ jobs:
           yarn spec --coverage
           yarn coverage
         env:
+          PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
+          PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
+          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
+          PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
       - name: Integration test
         run: |
