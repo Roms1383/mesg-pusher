@@ -18,7 +18,7 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Use NPM and Yarn
+      - name: Upgrade NPM and Yarn
         run: |
           npm i -g npm@$NPM
           curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN
@@ -40,19 +40,27 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Use NPM and Yarn
+      - name: Upgrade NPM and Yarn
         run: |
           npm i -g npm@$NPM
           curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN
           export PATH="$HOME/.yarn/bin:$PATH"
       - name: Unit test
         run: |
-          echo "Unit tests"
-          npm install -g mesg-cli codacy-coverage
+          npm install -g codacy-coverage
           yarn
           yarn spec --coverage
           yarn coverage
-          echo "Integration test"
+        env:
+          PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
+          PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
+          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
+          PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      - name: Integration test
+        run: |
+          npm install -g mesg-cli
+          yarn
           docker swarm init
           yarn test
         env:
@@ -62,7 +70,6 @@ jobs:
           PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
           PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           PUSHER_CLUSTER: ${{ secrets.PUSHER_CLUSTER }}
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
   release:
     name: Release
     if: github.ref == 'refs/heads/master'
@@ -78,7 +85,7 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Use NPM and Yarn
+      - name: Upgrade NPM and Yarn
         run: |
           npm i -g npm@$NPM
           curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN

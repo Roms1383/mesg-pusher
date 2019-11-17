@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<ruleset name="mesg-pusher"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        Set of custom rules for mesg-pusher
+    </description>
+
+
+    <rule ref="category/ecmascript/codestyle.xml">
+      <exclude name="UnnecessaryBlock"/>
+      <exclude name="IfStmtsMustUseBraces"/>
+      <exclude name="IfElseStmtsMustUseBraces"/>
+    </rule>
+
+    <exclude-pattern>.*/.github/.*</exclude-pattern>
+    <exclude-pattern>.*/my-tests/.*</exclude-pattern>
+    <exclude-pattern>.*/node_modules/.*</exclude-pattern>
+
+</ruleset>
