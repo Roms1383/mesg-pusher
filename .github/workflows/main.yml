@@ -18,7 +18,7 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Use NPM and Yarn
+      - name: Upgrade NPM and Yarn
         run: |
           npm i -g npm@$NPM
           curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN
@@ -40,7 +40,7 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Use NPM and Yarn
+      - name: Upgrade NPM and Yarn
         run: |
           npm i -g npm@$NPM
           curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN
@@ -85,7 +85,7 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Use NPM and Yarn
+      - name: Upgrade NPM and Yarn
         run: |
           npm i -g npm@$NPM
           curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN
