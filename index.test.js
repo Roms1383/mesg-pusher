@@ -1,9 +1,14 @@
 require('dotenv').config()
 const Client = require('pusher-js')
 const MESG = require('mesg-js').application()
-const execute = async params => new Promise((resolve, reject) => MESG.executeTaskAndWaitResult(params)
-.then(resolve)
-.catch(reject))
+const execute = async ({ taskKey, params, instanceHash }) => {
+  const { outputs } = await MESG.executeTaskAndWaitResult({
+    taskKey,
+    inputs: MESG.encodeData(params),
+    instanceHash
+  })
+  return MESG.decodeData(outputs)
+}
 describe('Tests', () => {
   const channel = 'continuous-integration'
   const event = 'some-event'
@@ -15,40 +20,40 @@ describe('Tests', () => {
     subscription.bind(event)
   })
   it('channel', async () => {
-    const inputs = MESG.encodeData({ name: channel })
-    await execute({ taskKey: 'channel', inputs, instanceHash })
-    .then(({ outputs }) => MESG.decodeData(outputs))
-    .then(outputs => {
-      expect(outputs).toHaveProperty('occupied')
-      expect(outputs).toHaveProperty('user_count')
-      expect(outputs).toHaveProperty('subscription_count')
+    const result = await execute({
+      taskKey: 'channel',
+      params: { name: channel },
+      instanceHash
     })
+    expect(result).toHaveProperty('occupied')
+    expect(result).toHaveProperty('user_count')
+    expect(result).toHaveProperty('subscription_count')
   })
   it('channels', async () => {
-    const inputs = MESG.encodeData({})
-    await execute({ taskKey: 'channels', inputs, instanceHash })
-    .then(({ outputs }) => MESG.decodeData(outputs))
-    .then(outputs => {
-      expect(outputs).toHaveProperty('channels')
-      expect(Array.isArray(outputs.channels)).toBe(true)
+    const result = await execute({
+      taskKey: 'channels',
+      params: {},
+      instanceHash
     })
+    expect(result).toHaveProperty('channels')
+    expect(Array.isArray(result.channels)).toBe(true)
   })
   it('trigger', async () => {
-    const inputs = MESG.encodeData({ name: event, channel, data: { test: 'some value' } })
-    await execute({ taskKey: 'trigger', inputs, instanceHash })
-    .then(({ outputs }) => MESG.decodeData(outputs))
-    .then(outputs => {
-      expect(outputs).toHaveProperty('message')
-      expect(outputs.message).toBe('sent')
+    const result = await execute({
+      taskKey: 'trigger',
+      params: { name: event, channel, data: { test: 'some value' } },
+      instanceHash
     })
+    expect(result).toHaveProperty('message')
+    expect(result.message).toBe('sent')
   })
   it('triggerBatch', async () => {
-    const inputs = MESG.encodeData({ batch: [{ channel, name: event, data: { test: 'some value' } }] })
-    await execute({ taskKey: 'triggerBatch', inputs, instanceHash })
-    .then(({ outputs }) => MESG.decodeData(outputs))
-    .then(outputs => {
-      expect(outputs).toHaveProperty('message')
-      expect(outputs.message).toBe('sent')
+    const result = await execute({
+      taskKey: 'triggerBatch',
+      params: { batch: [{ channel, name: event, data: { test: 'some value' } }] },
+      instanceHash
     })
+    expect(result).toHaveProperty('message')
+    expect(result.message).toBe('sent')
   })
 })
