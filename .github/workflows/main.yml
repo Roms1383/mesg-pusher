@@ -1,8 +1,8 @@
 name: build
 on: [push]
 env:
-  NPM: '6.12.0'
-  YARN: '1.19.1'
+  NPM: '6.13.4'
+  YARN: '1.21.1'
   CI: true
 jobs:
   lint:
